@@ -1,21 +1,22 @@
 const initialState = {
   data: [],
   multiData: [],
-  inputCityValue: "",
+  inputCityValue: 'Kyiv',
+  city: null,
   loading: false,
   error: false,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "FETCH_WEATHER_REQUEST":
+    case 'FETCH_WEATHER_REQUEST':
       return {
         ...state,
         loading: true,
-        error: null
+        error: null,
       };
 
-    case "FETCH_CURRENT_WEATHER":
+    case 'FETCH_CURRENT_WEATHER':
       return {
         ...state,
         data: action.payload,
@@ -23,7 +24,7 @@ const reducer = (state = initialState, action) => {
         error: false,
       };
 
-    case "FETCH_FIVE_DAYS_WEATHER":
+    case 'FETCH_FIVE_DAYS_WEATHER':
       return {
         ...state,
         multiData: action.payload,
@@ -31,17 +32,23 @@ const reducer = (state = initialState, action) => {
         error: false,
       };
 
-    case "FETCH_WEATHER_FAILURE":
+    case 'FETCH_WEATHER_FAILURE':
       return {
         ...state,
         loading: false,
         error: true,
       };
 
-    case "ON_CHANGE_INPUT_CITY":
+    case 'ON_CHANGE_INPUT_CITY':
       return {
         ...state,
         inputCityValue: action.payload,
+      };
+
+    case 'ON_SUBMIT_CITY':
+      return {
+        ...state,
+        city: action.payload,
       };
 
     default:
